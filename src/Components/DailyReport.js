@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import report from '../fakeData/report';
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Tooltip } from 'recharts';
 import './DailyReport.css'
 const data01 = [
     { name: 'Group A', value: 400 },
@@ -76,8 +76,7 @@ const DailyReport = () => {
     // const totalMemberInCmt_B_18_19 = (report.filter(element => element.dept === "Computer" && element.section === "B")).length
 
     // console.log(totalMemberInCmt_B_18_19)
-    let list = []
-    const [current_department, setCurrentDepartment] = useState([])
+    
 
     const [current, setCurrent] = useState('Computer')
 
@@ -109,62 +108,60 @@ const DailyReport = () => {
 
         if (cmt_18_19_sec_A.length > 0) {
             cmt_18_19_sec_A.filter(elem => elem.attendanceList.filter(item => {
-                cmt_18_19_sec_A_list.push(item)
+                return cmt_18_19_sec_A_list.push(item)
             }))
             setComputer_A_18_19(cmt_18_19_sec_A_list)
         }
 
         if (cmt_18_19_sec_B.length > 0) {
             cmt_18_19_sec_B.filter(elem => elem.attendanceList.filter(item => {
-                cmt_18_19_sec_B_list.push(item)
+                return cmt_18_19_sec_B_list.push(item)
             }))
             setComputer_B_18_19(cmt_18_19_sec_B_list)
         }
         if (cmt_19_20_sec_A.length > 0) {
             cmt_19_20_sec_A.filter(elem => elem.attendanceList.filter(item => {
-                cmt_19_20_sec_A_list.push(item)
+                return cmt_19_20_sec_A_list.push(item)
             }))
             setComputer_A_19_20(cmt_19_20_sec_A_list)
         }
 
         if (cmt_19_20_sec_B.length > 0) {
             cmt_19_20_sec_B.filter(elem => elem.attendanceList.filter(item => {
-                cmt_19_20_sec_B_list.push(item)
+                return cmt_19_20_sec_B_list.push(item)
             }))
             setComputer_B_19_20(cmt_19_20_sec_B_list)
         }
         if (cmt_20_21_sec_A.length > 0) {
             cmt_20_21_sec_A.filter(elem => elem.attendanceList.filter(item => {
-                cmt_20_21_sec_A_list.push(item)
+                return cmt_20_21_sec_A_list.push(item)
             }))
             setComputer_A_20_21(cmt_20_21_sec_A_list)
         }
 
         if (cmt_20_21_sec_B.length > 0) {
             cmt_20_21_sec_B.filter(elem => elem.attendanceList.filter(item => {
-                cmt_20_21_sec_B_list.push(item)
+                return cmt_20_21_sec_B_list.push(item)
             }))
             setComputer_B_20_21(cmt_20_21_sec_B_list)
         }
         if (cmt_21_22_sec_A.length > 0) {
             cmt_21_22_sec_A.filter(elem => elem.attendanceList.filter(item => {
-                cmt_21_22_sec_A_list.push(item)
+                return cmt_21_22_sec_A_list.push(item)
             }))
             setComputer_A_21_22(cmt_21_22_sec_A_list)
         }
 
         if (cmt_21_22_sec_B.length > 0) {
             cmt_21_22_sec_B.filter(elem => elem.attendanceList.filter(item => {
-                cmt_21_22_sec_B_list.push(item)
+                return cmt_21_22_sec_B_list.push(item)
             }))
             setComputer_B_21_22(cmt_21_22_sec_B_list)
         }
+
+        // eslint-disable-next-line
     }, [])
 
-    useEffect(() => {
-        const all_cmt = report.filter(member => member.dept === current)
-        setCurrentDepartment(all_cmt)
-    }, [current])
 
 
     return (
@@ -264,12 +261,12 @@ const DailyReport = () => {
                                 <h6 className="card-subtitle mb-2 text-muted">Section:  {`${current}`}-A</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Total Student:
                                     {
-                                        (report.filter(item => item.dept === current && item.section === 'A' && item.session == "19-20")).length
+                                        (report.filter(item => item.dept === current && item.section === 'A' && item.session === "19-20")).length
                                     }</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Today Present: {
                                     (computer_A_19_20.filter(item => item.status === "Present")).length}</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Today Absent: {
-                                    (((report.filter(item => item.dept === current && item.section === 'A' && item.session == "19-20")).length) - (computer_A_19_20.filter(item => item.status === "Present")).length)}</h6>
+                                    (((report.filter(item => item.dept === current && item.section === 'A' && item.session === "19-20")).length) - (computer_A_19_20.filter(item => item.status === "Present")).length)}</h6>
                             </div>
                         </div>
                         <div className='col-md-6'>
@@ -299,12 +296,12 @@ const DailyReport = () => {
                                 <h6 className="card-subtitle mb-2 text-muted">Section:  {`${current}`}-A</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Total Student:
                                     {
-                                        (report.filter(item => item.dept === current && item.section === 'B' && item.session == "19-20")).length
+                                        (report.filter(item => item.dept === current && item.section === 'B' && item.session === "19-20")).length
                                     }</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Today Present: {
                                     (computer_B_19_20.filter(item => item.status === "Present")).length}</h6>
                                 <h6 className="card-subtitle mb-2 text-muted">Today Absent: {
-                                    (((report.filter(item => item.dept === current && item.section === 'B' && item.session == "19-20")).length) - (computer_B_19_20.filter(item => item.status === "Present")).length)}</h6>
+                                    (((report.filter(item => item.dept === current && item.section === 'B' && item.session === "19-20")).length) - (computer_B_19_20.filter(item => item.status === "Present")).length)}</h6>
                             </div>
                         </div>
                         <div className='col-md-6'>
